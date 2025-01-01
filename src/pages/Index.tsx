@@ -11,36 +11,6 @@ import { WeddingPlace, Organizer, Booking } from '@/types';
 
 const API_URL = 'http://localhost:3000';
 
-interface WeddingPlace {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-  location: string;
-}
-
-interface Organizer {
-  id: number;
-  name: string;
-  description: string;
-}
-
-interface Booking {
-  id: number;
-  userId: number;
-  weddingPlaceId: number;
-  organizerId: number;
-  bookingState: string;
-  weddingPlace: {
-    name: string;
-    price: number;
-  };
-  organizer: {
-    name: string;
-  };
-}
-
 const Index = () => {
   const { toast } = useToast();
   const [token, setToken] = useState('');
@@ -285,4 +255,3 @@ const Index = () => {
 };
 
 export default Index;
-
