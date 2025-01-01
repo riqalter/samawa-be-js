@@ -52,4 +52,23 @@ router.post('/', async (req, res) => {
   }
 });
 
+// Checkout booking
+router.post('/:id/checkout', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query(
+      'UPDATE bookings SET booking_state = $1 WHERE id = $2 AND user_id = $3 RETURNING *',
+      ['confirmed', id, req.user.id]
+    );
+    
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Booking not found' });
+    }
+    
+    res.json(result.rows[0]);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 export default router;
