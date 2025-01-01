@@ -3,6 +3,7 @@ import pool from '../db/index.js';
 
 const router = express.Router();
 
+// Get all bookings for a user
 router.get('/', async (req, res) => {
   try {
     const result = await pool.query(`
@@ -32,6 +33,20 @@ router.get('/', async (req, res) => {
     }));
     
     res.json(bookings);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Create a new booking
+router.post('/', async (req, res) => {
+  const { weddingPlaceId, organizerId } = req.body;
+  try {
+    const result = await pool.query(
+      'INSERT INTO bookings (user_id, wedding_place_id, organizer_id, booking_state) VALUES ($1, $2, $3, $4) RETURNING *',
+      [req.user.id, weddingPlaceId, organizerId, 'pending']
+    );
+    res.status(201).json(result.rows[0]);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
