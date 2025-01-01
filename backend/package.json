@@ -1,13 +1,13 @@
 {
-  "name": "wedding-organizer-api",
+  "name": "samawa-backend",
   "version": "1.0.0",
-  "description": "Wedding Organizer Broker API",
+  "description": "Samawa API",
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
-    "seed": "node src/seeds/seed.js"
+    "start": "bun src/index.js",
+    "dev": "bun --hot src/index.js",
+    "seed": "bun src/seeds/seed.js"
   },
   "dependencies": {
     "@faker-js/faker": "^8.0.2",

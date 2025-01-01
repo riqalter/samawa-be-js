@@ -1,22 +1,22 @@
-# Wedding Organizer API
+# Samawa BE API
 
 ## Setup
 
-1. Install PostgreSQL and create a database named `wedding_db`
+1. Install PostgreSQL and create a database named `wedding_db` (default)
 
 2. Install dependencies:
 ```bash
-npm install
+bun i
 ```
 
 3. Run the seed script to create tables and sample data:
 ```bash
-npm run seed
+bun run seed
 ```
 
 4. Start the server:
 ```bash
-npm run dev
+bun run dev
 ```
 
 ## Test Credentials
