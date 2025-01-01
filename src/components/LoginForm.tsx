@@ -20,17 +20,25 @@ const LoginForm = ({ onLogin }: LoginFormProps) => {
   const handleLogin = async () => {
     try {
       setLoading(true);
+      console.log('Attempting login with username:', username);
       const response = await axios.post(`${API_URL}/auth/login`, {
         username,
         password
       });
       
-      onLogin(response.data.token);
-      toast({
-        title: "Success",
-        description: "Logged in successfully!",
-      });
+      console.log('Login response:', response.data);
+      
+      if (response.data && response.data.token) {
+        onLogin(response.data.token);
+        toast({
+          title: "Success",
+          description: "Logged in successfully!",
+        });
+      } else {
+        throw new Error('No token received');
+      }
     } catch (error) {
+      console.error('Login error:', error);
       toast({
         title: "Error",
         description: "Failed to login. Please check your credentials.",

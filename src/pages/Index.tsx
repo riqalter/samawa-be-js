@@ -34,16 +34,20 @@ const Index = () => {
 
   const fetchBookings = async (currentToken: string) => {
     try {
+      console.log('Fetching bookings with token:', currentToken);
       const response = await axios.get<Booking[]>(`${API_URL}/bookings`, {
         headers: {
-          Authorization: `Bearer ${currentToken}`
+          'Authorization': `Bearer ${currentToken}`,
+          'Content-Type': 'application/json'
         }
       });
+      console.log('Bookings response:', response.data);
       setBookings(response.data);
     } catch (error) {
+      console.error('Error fetching bookings:', error);
       toast({
         title: "Error",
-        description: "Failed to fetch bookings.",
+        description: "Failed to fetch bookings. Please try logging in again.",
         variant: "destructive",
       });
     }
@@ -51,13 +55,17 @@ const Index = () => {
 
   const fetchWeddingPlaces = async (currentToken: string) => {
     try {
+      console.log('Fetching wedding places with token:', currentToken);
       const response = await axios.get<WeddingPlace[]>(`${API_URL}/wedding-places`, {
         headers: {
-          Authorization: `Bearer ${currentToken}`
+          'Authorization': `Bearer ${currentToken}`,
+          'Content-Type': 'application/json'
         }
       });
+      console.log('Wedding places response:', response.data);
       setWeddingPlaces(response.data);
     } catch (error) {
+      console.error('Error fetching wedding places:', error);
       toast({
         title: "Error",
         description: "Failed to fetch wedding places.",
@@ -68,13 +76,17 @@ const Index = () => {
 
   const fetchOrganizers = async (currentToken: string) => {
     try {
+      console.log('Fetching organizers with token:', currentToken);
       const response = await axios.get<Organizer[]>(`${API_URL}/organizers`, {
         headers: {
-          Authorization: `Bearer ${currentToken}`
+          'Authorization': `Bearer ${currentToken}`,
+          'Content-Type': 'application/json'
         }
       });
+      console.log('Organizers response:', response.data);
       setOrganizers(response.data);
     } catch (error) {
+      console.error('Error fetching organizers:', error);
       toast({
         title: "Error",
         description: "Failed to fetch organizers.",
@@ -164,7 +176,17 @@ const Index = () => {
   };
 
   if (!token) {
-    return <LoginForm onLogin={setToken} />;
+    return (
+      <LoginForm 
+        onLogin={(newToken) => {
+          setToken(newToken);
+          localStorage.setItem('token', newToken);
+          fetchBookings(newToken);
+          fetchWeddingPlaces(newToken);
+          fetchOrganizers(newToken);
+        }} 
+      />
+    );
   }
 
   if (showReceipt && selectedBooking) {
