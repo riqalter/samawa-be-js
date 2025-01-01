@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useToast } from "@/hooks/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import axios from 'axios';
 import LoginForm from '@/components/LoginForm';
 import BookingList from '@/components/BookingList';
 import Receipt from '@/components/Receipt';
 import { Button } from "@/components/ui/button";
+import { WeddingPlace, Organizer, Booking } from '@/types';
 
 const API_URL = 'http://localhost:3000';
 
@@ -283,3 +285,4 @@ const Index = () => {
 };
 
 export default Index;
+

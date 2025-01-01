@@ -3,6 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import axios from 'axios';
+
+const API_URL = 'http://localhost:3000';
 
 interface LoginFormProps {
   onLogin: (token: string) => void;
