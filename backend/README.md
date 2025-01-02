@@ -2,7 +2,13 @@
 
 ## Setup
 
-1. Install PostgreSQL and create a database named `wedding_db` (default)
+1. Setup environment variables:
+
+```bash
+PORT=
+DATABASE_URL= # Postgres database URL
+JWT_SECRET=
+```
 
 2. Install dependencies:
 ```bash
